@@ -156,4 +156,44 @@
     parallax();
   }
 
+    /* ---- Contact form modal (demo) --------------------------------------- */
+  var modal = $('#dh-contact-modal');
+  if (modal && typeof modal.showModal === 'function') {
+    var form = $('form', modal);
+    var done = $('.dh-modal__done', modal);
+    var lastFocus = null;
+
+    $$('[data-dh-open-form]').forEach(function (trigger) {
+      trigger.addEventListener('click', function (e) {
+        e.preventDefault();
+        lastFocus = document.activeElement;
+        form.hidden = false;
+        done.hidden = true;
+        modal.showModal();
+        root.classList.add('dh-modal-open');
+      });
+    });
+
+    $$('[data-dh-close-form]', modal).forEach(function (btn) {
+      btn.addEventListener('click', function () { modal.close(); });
+    });
+
+    // Click on the dark backdrop closes the dialog (the panel fills the dialog, so
+    // only a backdrop click has the dialog itself as its target).
+    modal.addEventListener('click', function (e) { if (e.target === modal) modal.close(); });
+
+    modal.addEventListener('close', function () {
+      root.classList.remove('dh-modal-open');
+      if (lastFocus) lastFocus.focus();
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // DEMO ONLY: replace with a real submission (see note below)
+      form.hidden = true;
+      done.hidden = false;
+      form.reset();
+      done.focus();
+    });
+  }
+
 })();

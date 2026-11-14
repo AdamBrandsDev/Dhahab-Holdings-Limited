@@ -314,3 +314,47 @@ body{margin:0;background:#1B1B1B}
   .dh-hero__scroll{animation:none}
   [data-dh-parallax]{transform:none!important}
 }
+
+
+/* ==========================================================================
+   Contact form modal
+   ========================================================================== */
+html.dh-modal-open{overflow:hidden}
+.dh-modal{
+  width:min(44rem,calc(100% - 2rem));max-height:calc(100vh - 2rem);max-height:calc(100dvh - 2rem);
+  margin:auto;padding:0;overflow:auto;color-scheme:dark;
+  background:var(--dh-bg);color:var(--dh-ivory);border:1px solid var(--dh-line);
+}
+.dh-modal::backdrop{background:rgba(10,10,10,.82);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.dh-modal[open]{animation:dh-modal-in .6s var(--dh-ease)}
+.dh-modal[open]::backdrop{animation:dh-fade-in .5s ease}
+@keyframes dh-modal-in{from{opacity:0;transform:translateY(1.5rem)}to{opacity:1;transform:none}}
+@keyframes dh-fade-in{from{opacity:0}to{opacity:1}}
+.dh-modal [hidden]{display:none!important}
+
+.dh-modal__panel{position:relative;padding:clamp(1.75rem,4vw,3.5rem)}
+.dh-modal__close{position:absolute;top:1rem;right:1rem;width:2.75rem;height:2.75rem;background:none;border:0;color:var(--dh-ivory);font-size:2rem;line-height:1;font-weight:200;cursor:pointer;transition:color .3s}
+.dh-modal__close:hover{color:var(--dh-gold)}
+.dh-modal__title{font-family:var(--dh-font-display);font-weight:300;font-size:clamp(2rem,4vw,3rem);line-height:1.05;margin-bottom:.75rem;padding-right:2.5rem}
+.dh-modal__intro{color:var(--dh-ivory-dim);margin-bottom:2rem}
+
+.dh-modal__form{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 1.75rem}
+.dh-field{display:grid;gap:.4rem}
+.dh-field--full{grid-column:1/-1}
+.dh-field label{font-size:.6875rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--dh-gold-muted)}
+.dh-field input,.dh-field select,.dh-field textarea{
+  width:100%;padding:.7rem 0;border:0;border-bottom:1px solid var(--dh-line);border-radius:0;
+  background:transparent;color:var(--dh-ivory);font:inherit;font-size:1rem;
+  transition:border-color .3s;
+}
+.dh-field textarea{resize:vertical;min-height:6rem}
+.dh-field select option{background:var(--dh-bg);color:var(--dh-ivory)}
+.dh-field input:focus,.dh-field select:focus,.dh-field textarea:focus{outline:0;border-bottom-color:var(--dh-gold)}
+.dh-field input:user-invalid,.dh-field select:user-invalid,.dh-field textarea:user-invalid{border-bottom-color:#c0392b}
+.dh-modal__done{display:grid;justify-items:start;gap:1.25rem;padding-block:2rem}
+.dh-modal__done:focus{outline:0}
+
+@media (max-width:560px){
+  .dh-modal__form{grid-template-columns:1fr}
+  .dh-modal__form .dh-btn{width:100%}
+}
